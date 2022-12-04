@@ -23,15 +23,5 @@ code {
     monospace;
 }
 
-button {
-  margin-top: 34px !important;
-}
 
-.nav-link {
-  color: #544423 !important;
-}
-
-.nav-link:not(.active) {
-  background: #ebc183e7 !important;
-}
 
