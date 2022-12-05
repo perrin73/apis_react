@@ -1,5 +1,5 @@
 
-url del video: pronto.
+url del video: https://youtu.be/tguFlvMaGA4
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
