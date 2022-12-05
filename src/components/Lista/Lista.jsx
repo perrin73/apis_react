@@ -1,6 +1,6 @@
 
 
-const Lista = ({arr,setIdReceta}) => {
+const Lista = ({arr,setIdReceta}) => { //genera listado de cocktails y links para cambiar estado de idReceta
   const coctails = arr.map((coctail) => (
     <tr key={coctail.idDrink} className="fs-6">
       <th scope="row">{coctail.idDrink}</th>

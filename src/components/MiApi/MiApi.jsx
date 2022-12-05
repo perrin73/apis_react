@@ -7,23 +7,23 @@ import { useState, useEffect } from 'react'
 
 
 function MiApi() {
-  const [ambito, setAmbito] = useState('a')
   const url = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?'
   const urlOps = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?'
   const urlRec = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i='
-  const [opciones, setOpciones] = useState([])
-  const [opcion, setOpcion] = useState('Alcoholic')
-  const [busqueda, setBusqueda] = useState()
-  const [idreceta, setIdReceta] = useState()
-  const [cocktails, setCocktails] = useState([]);
-  const [receta, setReceta] = useState([])
-  const [orden, setOrden] = useState()
+  const [ambito, setAmbito] = useState('a')
+  const [opciones, setOpciones] = useState([])//array con opciones cargadas
+  const [opcion, setOpcion] = useState('Alcoholic')//opcion seleccionada en el select
+  const [busqueda, setBusqueda] = useState()//termino de busqueda del input busqueda
+  const [idreceta, setIdReceta] = useState()// id del cocktail seleccionado al presionar id receta
+  const [cocktails, setCocktails] = useState([]);//array de los cocktails listados de acuerdo a seleccion
+  const [receta, setReceta] = useState([])//array con los datos de una receta
+  const [orden, setOrden] = useState()//variable para activar orden de la lista de cocktails
 
 
-  useEffect(() => {
+  useEffect(() => {  //gatilla la carga de select opciones  linea 84
     consultarOpciones();
-  }, [ambito]);
-   const consultarOpciones = async () => {
+  }, [ambito]); 
+   const consultarOpciones = async () => { //trae opciones para el combo de opciones
     const apiUrl = url + ambito + '=list'
     const response = await fetch(apiUrl)
     const data = await response.json()
@@ -33,22 +33,20 @@ function MiApi() {
   }
 
 
-  useEffect(() => {
+  useEffect(() => { // gatilla carga de datos en listado de acuerdo a opciones seleccionadas
     consultarTragos();
   }, [opcion]);
-  const consultarTragos = async () => {
+  const consultarTragos = async () => { //trae datos de la API de acuerdo a opciones 
     const apiUrlOp = urlOps + ambito + '=' + opcion
     const responseOp = await fetch(apiUrlOp)
     const dataOp = await responseOp.json()
-
-    //console.log(dataOp.drinks)
     setCocktails(dataOp.drinks)
   }
 
-  useEffect(() => {
+  useEffect(() => {// gatilla la carga de datos en la receta al hacer click en botones del componente lista linea 106
     if (idreceta) { consultarReceta() }
   }, [idreceta]);
-  const consultarReceta = async () => {
+  const consultarReceta = async () => { // trae datos a la receta usando el id del listado
     const apiRec = urlRec + idreceta
     const responseRec = await fetch(apiRec)
     const dataRec = await responseRec.json()
@@ -56,7 +54,7 @@ function MiApi() {
     setReceta(dataRec.drinks[0])
   }
 
-  useEffect(() => {
+  useEffect(() => { // gatilla reversion del arreglo al presionar boton de orden nombre de listado
     cocktails.reverse()
   }, [orden]);
 
